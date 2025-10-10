@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { WeatherListComponent } from './views/weather-list/weather-list.component';
+import { LeftSidebarComponent } from './layouts/left-sidebar/left-sidebar.component';
+import { MainComponent } from './layouts/main/main.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,WeatherListComponent],
+  imports: [RouterOutlet,LeftSidebarComponent,MainComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
