@@ -7,4 +7,19 @@
       <i class="fa-times fa-solid closeIcon fal"></i>
     </div>
   </div>
+  <div class="sidebarNav">
+    @for (item of navItems; track $index) {
+    <li class="sidebarNavItem">
+      <a
+        class="sidebarNavLink"
+        [routerLink]="item.routeLink"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <i class="sidebarLinkIcon" [class]="item.icon"></i>
+        <span class="sidebarLinkText">{{ item.label }}</span>
+      </a>
+    </li>
+    }
+  </div>
 </div>
