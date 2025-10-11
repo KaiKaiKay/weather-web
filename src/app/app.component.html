@@ -1,2 +1,10 @@
-<app-left-sidebar></app-left-sidebar>
-<app-main></app-main>
+<!-- 側邊欄 -->
+<app-left-sidebar
+  [isLeftSidebarCollapsed]="isLeftSidebarCollapsed()"
+  (changeIsLeftSidebarCollapsed)="changeIsLeftSidebarCollapsed($event)"
+/>
+<!-- 主體內容區 -->
+<app-main
+  [isLeftSidebarCollapsed]="isLeftSidebarCollapsed()"
+  [screenWidth]="screenWidth()"
+/>
