@@ -1,0 +1,112 @@
+//顏色變數
+$darkGray: #2e2e2e;
+$lightGray: #8e8e8e;
+$black: #000;
+$white: #fff;
+
+.sidebar {
+  background: $darkGray;
+  transition: all 0.5s ease;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  width: 16rem;
+  height: 100vh;
+  box-shadow: 0.05rem 0 1.25rem 0 $lightGray;
+
+  &.sidebarCollapsed {
+    width: 5rem;
+  }
+
+  .logoContainer {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 0.8rem 0 0.8rem;
+
+    .logo {
+      background: $white;
+      text-align: center;
+      width: 3rem;
+      min-width: 3rem;
+      border-radius: 0.3rem;
+      padding: 0.3rem;
+      font-size: 24px;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+    }
+
+    .logoText {
+      margin-left: 1.5rem;
+      font-size: 24px;
+      font-weight: 500;
+      color: $white;
+    }
+
+    .closeBtn {
+      margin-left: auto;
+      cursor: pointer;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      background-color: transparent;
+      border: none;
+
+      .fa-times {
+        color: $white;
+        font-size: 24px;
+      }
+    }
+  }
+
+  .sidebarNav {
+    list-style: none;
+    padding: 0.8rem;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: calc(100% - 3.65rem);
+    cursor: pointer;
+
+    .sidebarNavItem {
+      width: 100%;
+      margin-bottom: 0.6rem;
+
+      .sidebarNavLink {
+        display: flex;
+        align-items: center;
+        height: 3rem;
+        color: $white;
+        text-decoration: none;
+        border-radius: 0.6rem;
+        transition: all 0.3s ease;
+
+        .sidebarLinkIcon {
+          font-size: 22px;
+          min-width: 2rem;
+          text-align: center;
+          padding: 14px;
+        }
+
+        .sidebar-link-text {
+          margin-left: 1.5rem;
+        }
+      }
+
+      &:hover .sidebarNavLink {
+        background-color: $white;
+        color: $black;
+      }
+    }
+  }
+}
+
+.active {
+  background-color: $white;
+
+  .sidebarLinkIcon,
+  .sidebarLinkText {
+    color: $darkGray;
+  }
+}

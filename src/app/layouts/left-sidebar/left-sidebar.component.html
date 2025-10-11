@@ -1,25 +1,33 @@
-<div class="sidebar">
+<div
+  class="sidebar"
+  [ngClass]="isLeftSidebarCollapsed() ? 'sidebarCollapsed' : ''"
+>
   <div class="logoContainer">
-    <button class="logo">
-      <i class="fa-bars fa-solid fal"></i>
+    <button class="logo" (click)="toggleCollapse()">
+      <i class="fal fa-solid fa-bars"></i>
     </button>
-    <div class="closeBtn">
-      <i class="fa-times fa-solid closeIcon fal"></i>
-    </div>
+    @if (!isLeftSidebarCollapsed()) {
+      <div class="logoText">Weather</div>
+      <button class="closeBtn" (click)="closeSidenav()">
+        <i class="fal fa-times fa-solid close-icon"></i>
+      </button>
+    }
   </div>
   <div class="sidebarNav">
     @for (item of navItems; track $index) {
-    <li class="sidebarNavItem">
-      <a
-        class="sidebarNavLink"
-        [routerLink]="item.routeLink"
-        routerLinkActive="active"
-        [routerLinkActiveOptions]="{ exact: true }"
-      >
-        <i class="sidebarLinkIcon" [class]="item.icon"></i>
-        <span class="sidebarLinkText">{{ item.label }}</span>
-      </a>
-    </li>
+      <li class="sidebarNavItem">
+        <a
+          class="sidebarNavLink"
+          [routerLink]="item.routeLink"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <i class="sidebarLinkIcon" [class]="item.icon"></i>
+          @if (!isLeftSidebarCollapsed()) {
+            <span class="sidebarLinkText">{{ item.label }}</span>
+          }
+        </a>
+      </li>
     }
   </div>
 </div>
