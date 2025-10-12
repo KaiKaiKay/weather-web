@@ -57,13 +57,121 @@
 </div>
 
 <!-- 查詢結果卡片 -->
-<div class="card">
+<div class="card" *ngIf="isShowTable">
   <div class="cardHeader">
     <h1 class="cardTitle">查詢結果</h1>
   </div>
-  <div class="cardBody">
-    <!-- 查詢結果列表 -->
-  </div>
 
-  <!-- 分頁 -->
+  <div class="cardBody">
+    <!-- 操作區域 -->
+    <div class="toolArea">
+      <p>已選取資料筆數： {{ selectedCount }} 筆。</p>
+      <button
+        class="btn btnSecondary"
+        type="button"
+        (click)="clearSelection()"
+        [disabled]="selectedCount === 0"
+      >
+        取消勾選（{{ selectedCount }}）
+      </button>
+      <button
+        class="btn btnPrimary"
+        type="button"
+        (click)="addFavorites()"
+        [disabled]="selectedCount === 0"
+      >
+        加入我的最愛（{{ selectedCount }}）
+      </button>
+    </div>
+
+    <!-- 查詢結果表格 -->
+    <div class="tableWrap" *ngIf="rows.length; else noData">
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="stickyCol">
+              <input
+                type="checkbox"
+                [checked]="allCheckedOnPage"
+                [indeterminate]="partialCheckedOnPage"
+                (change)="toggleAllOnPage($event)"
+              />
+            </th>
+            <th class="stickyCol2">縣市</th>
+            <th *ngFor="let t of timeHeaders">{{ t.label }}</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let row of pagedRows">
+            <td class="stickyCol">
+              <input
+                type="checkbox"
+                [checked]="row.selected"
+                (change)="onRowCheckboxChange($event, row)"
+              />
+            </td>
+            <td class="stickyCol2">{{ row.locationName }}</td>
+
+            <!-- 三個時段 -->
+            <td *ngFor="let c of row.times">
+              <ng-container [ngSwitch]="c.kind">
+                <!-- 數字（MaxT/MinT/PoP）-->
+                <span *ngSwitchCase="'number'">
+                  <span class="val">{{ c.value }}</span>
+                  <span class="unit" *ngIf="c.unit">{{ c.unit }}</span>
+                </span>
+                <!-- 字串（Wx/CI）-->
+                <span *ngSwitchDefault>
+                  {{ c.value || "-" }}
+                </span>
+              </ng-container>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <ng-template #noData>
+      <div class="noData">查無資料，請調整條件後再試。</div>
+    </ng-template>
+
+    <!-- 分頁選擇器 -->
+    <div class="pagination" *ngIf="rows.length">
+      <div class="left">
+        共 {{ totalCount }} 筆，頁面 {{ currentPage }} / {{ totalPages }}
+      </div>
+      <div class="right">
+        <label>
+          每頁
+          <select
+            class="formControl small"
+            [value]="pageSize"
+            (change)="changePageSize($event)"
+          >
+            <option *ngFor="let s of pageSizeOptions" [value]="s">
+              {{ s }}
+            </option>
+          </select>
+          筆
+        </label>
+        <button
+          class="btn btnSecondary"
+          type="button"
+          (click)="prevPage()"
+          [disabled]="currentPage === 1"
+        >
+          上一頁
+        </button>
+        <button
+          class="btn btnPrimary"
+          type="button"
+          (click)="nextPage()"
+          [disabled]="currentPage === totalPages"
+        >
+          下一頁
+        </button>
+      </div>
+    </div>
+  </div>
 </div>

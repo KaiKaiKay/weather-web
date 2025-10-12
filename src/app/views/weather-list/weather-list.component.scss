@@ -28,9 +28,8 @@
     .error {
       color: red;
       font-size: 0.75rem;
-    font-weight: 500;
+      font-weight: 500;
     }
-
 
     .buttonArea {
       display: flex;
@@ -65,5 +64,95 @@
         }
       }
     }
+  }
+}
+
+.toolArea {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.tableWrap {
+  overflow-x: auto;
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    th,
+    td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #eee;
+      white-space: nowrap;
+      background: #fff;
+    }
+    thead th {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    .stickyCol {
+      position: sticky;
+      left: 0;
+      z-index: 2;
+      background: #fff;
+      width: 48px;
+    }
+    .stickyCol2 {
+      position: sticky;
+      left: 56px;
+      z-index: 2;
+      background: #fff;
+      min-width: 120px;
+    }
+
+    .val {
+      font-weight: 600;
+      margin-right: 2px;
+    }
+    .unit {
+      opacity: 0.65;
+    }
+  }
+}
+
+.noData {
+  color: #666;
+  padding: 8px 0;
+}
+
+.pagination {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  .left {
+    font-size: 0.9rem;
+    color: #666;
+    // 需要再調整位置
+  }
+
+  .right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    .formControl.small {
+      width: auto;
+      display: inline-block;
+      padding: 4px 6px;
+    }
+
+    // 按鈕樣式要再調整
+  }
+}
+
+/* 手機 RWD */
+@media (max-width: 640px) {
+  .stickyCol2 {
+    min-width: 96px;
   }
 }
