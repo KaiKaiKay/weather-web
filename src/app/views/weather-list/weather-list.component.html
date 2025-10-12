@@ -1,2 +1,65 @@
-<p>weather-list works!</p>
-<p>{{data}}</p>
+<!-- 建立卡片 -->
+<div class="card">
+  <div class="cardHeader">
+    <h1 class="cardTitle">查詢條件</h1>
+  </div>
+  <div class="cardBody">
+    <form [formGroup]="form">
+      <div class="formGroup">
+        <!-- 縣市 下拉選單 -->
+        <label for="citySelect">選擇縣市</label>
+        <select
+          id="citySelect"
+          class="formControl"
+          formControlName="city"
+          required
+        >
+          <option value="" disabled selected>請選擇</option>
+          <option *ngFor="let city of cities | keyvalue" [value]="city.key">
+            {{ city.value }}
+          </option>
+        </select>
+        <div
+          *ngIf="form.get('city')?.invalid && form.get('city')?.touched"
+          class="error"
+        >
+          必選
+        </div>
+
+        <!-- 天氣因子 下拉選單 -->
+        <label for="elementSelect">選擇天氣因子</label>
+        <select
+          id="elementSelect"
+          class="formControl"
+          formControlName="element"
+          required
+        >
+          <option value="" disabled selected>請選擇</option>
+          <option
+            *ngFor="let element of weatherElements | keyvalue"
+            [value]="element.key"
+          >
+            {{ element.value }}
+          </option>
+        </select>
+        <div
+          *ngIf="form.get('element')?.invalid && form.get('element')?.touched"
+          class="error"
+        >
+          必選
+        </div>
+
+        <!-- 查詢按鈕 -->
+        <button
+          class="btn btnPrimary"
+          type="button"
+          (click)="onSubmit()"
+          [disabled]="form.invalid"
+        >
+          <i class="fa-solid fa-search"></i>
+          查詢
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
