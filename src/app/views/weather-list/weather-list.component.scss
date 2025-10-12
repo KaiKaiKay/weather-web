@@ -8,14 +8,55 @@
     background-color: #f5f5f5;
     padding: 12px 16px;
 
-      .cardTitle {
-    font-size: 1.25rem;
-    margin-bottom: 0;
-  }
+    .cardTitle {
+      font-size: 1.25rem;
+      margin-bottom: 0;
+    }
   }
 
   .cardBody {
     padding: 12px 16px;
-  }
 
+    .formControl {
+      width: 100%;
+      padding: 8px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      margin: 8px 0;
+    }
+    .buttonArea {
+      display: flex;
+      justify-content: flex-end;
+
+      .btnPrimary {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 8px 10px;
+        font-size: 1rem;
+        border-radius: 4px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #0056b3;
+        }
+      }
+
+      .btnSecondary {
+        background-color: #6c757d;
+        color: #fff;
+        border: none;
+        padding: 8px 10px;
+        font-size: 1rem;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-right: 8px;
+
+        &:hover {
+          background-color: #5a6268;
+        }
+      }
+    }
+  }
 }

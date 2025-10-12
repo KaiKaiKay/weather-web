@@ -1,4 +1,4 @@
-<!-- 建立卡片 -->
+<!-- 查詢條件卡片 -->
 <div class="card">
   <div class="cardHeader">
     <h1 class="cardTitle">查詢條件</h1>
@@ -8,23 +8,12 @@
       <div class="formGroup">
         <!-- 縣市 下拉選單 -->
         <label for="citySelect">選擇縣市</label>
-        <select
-          id="citySelect"
-          class="formControl"
-          formControlName="city"
-          required
-        >
+        <select id="citySelect" class="formControl" formControlName="city">
           <option value="" disabled selected>請選擇</option>
           <option *ngFor="let city of cities | keyvalue" [value]="city.key">
             {{ city.value }}
           </option>
         </select>
-        <div
-          *ngIf="form.get('city')?.invalid && form.get('city')?.touched"
-          class="error"
-        >
-          必選
-        </div>
 
         <!-- 天氣因子 下拉選單 -->
         <label for="elementSelect">選擇天氣因子</label>
@@ -49,17 +38,33 @@
           必選
         </div>
 
-        <!-- 查詢按鈕 -->
-        <button
-          class="btn btnPrimary"
-          type="button"
-          (click)="onSubmit()"
-          [disabled]="form.invalid"
-        >
-          <i class="fa-solid fa-search"></i>
-          查詢
-        </button>
+        <!-- 按鈕區域 -->
+        <div class="buttonArea">
+          <!-- 清空按鈕 -->
+          <button class="btn btnSecondary" type="button" (click)="onClear()">
+            <i class="fa-solid fa-trash"></i>
+            清空
+          </button>
+
+          <!-- 查詢按鈕 -->
+          <button class="btn btnPrimary" type="button" (click)="onSubmit()">
+            <i class="fa-solid fa-search"></i>
+            查詢
+          </button>
+        </div>
       </div>
     </form>
   </div>
+</div>
+
+<!-- 查詢結果卡片 -->
+<div class="card">
+  <div class="cardHeader">
+    <h1 class="cardTitle">查詢結果</h1>
+  </div>
+  <div class="cardBody">
+    <!-- 查詢結果列表 -->
+  </div>
+
+  <!-- 分頁 -->
 </div>

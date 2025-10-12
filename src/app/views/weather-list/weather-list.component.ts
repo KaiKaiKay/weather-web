@@ -53,10 +53,10 @@ export class WeatherListComponent {
     屏東縣: '屏東縣',
   };
 
-  /** 天氣因子 
+  /** 天氣因子
    * 預報XML產品預報因子欄位中文說明表:
    * https://opendata.cwa.gov.tw/opendatadoc/MFC/A0012-001.pdf
-  */
+   */
   weatherElements: { [key: string]: string } = {
     Wx: '天氣現象',
     MaxT: '最高溫度',
@@ -68,7 +68,7 @@ export class WeatherListComponent {
   ngOnInit(): void {
     /** 天氣查詢條件表單初始化 */
     this.form = this.fb.group({
-      city: ['', Validators.required],
+      city: [''],
       element: ['', Validators.required],
     });
   }
@@ -76,14 +76,22 @@ export class WeatherListComponent {
   /** 查詢天氣 */
   onSubmit(): void {
     if (this.form.valid) {
-      const city = this.form.get('city')?.value;
+      const city = this.form.get('city')?.value || '';
       const elementName = this.form.get('element')?.value;
-      const url = `F-C0032-001?Authorization=${apiEnvironment.authorization}&locationName=${city}&elementName=${elementName}`;
 
+      const url = `F-C0032-001?Authorization=${apiEnvironment.authorization}&locationName=${city}&elementName=${elementName}`;
       this.weatherService.getData(url).subscribe((data) => {
         console.log(data);
-        //待處理資料顯示
+        // 處理資料顯示
       });
     }
+  }
+
+  onClear(): void {
+    this.form.reset();
+    // 預設選項:請選擇
+    this.form.patchValue({ city: '', element: '' });
+    // 清除資料顯示
+    this.data = '';
   }
 }
