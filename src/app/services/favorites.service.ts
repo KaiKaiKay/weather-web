@@ -9,7 +9,7 @@ const KEY = 'weatherFavorites';
 export class FavoritesService {
   constructor() {}
 
-  // 讀取所有最愛清單
+  /** 取得所有最愛清單 */
   favlist(): FavoriteItem[] {
     const raw = localStorage.getItem(KEY) || '[]';
     try {
@@ -19,24 +19,34 @@ export class FavoritesService {
     }
   }
 
-  // 儲存所有最愛清單
+  /** 儲存所有最愛清單 */
   saveAll(items: FavoriteItem[]) {
     localStorage.setItem(KEY, JSON.stringify(items));
   }
-
-  // 新增或更新最愛清單
+  /** 新增或更新最愛清單 */
   upsertFav(newItems: FavoriteItem[]) {
     const map = new Map(this.favlist().map((it) => [it.id, it]));
     newItems.forEach((n) => map.set(n.id, n));
     this.saveAll(Array.from(map.values()));
   }
 
-  // 更新最愛清單
-  updateFav(item: FavoriteItem) {}
+  /** 更新最愛清單 */
+  updateFav(item: FavoriteItem) {
+    const list = this.favlist();
+    const idx = list.findIndex((x) => x.id === item.id);
+    if (idx >= 0) {
+      list[idx] = item;
+      this.saveAll(list);
+    }
+  }
 
-  // 刪除最愛清單
-  removeFav(ids: string[]) {}
+  /** 刪除最愛清單 */
+  removeFav(ids: string[]) {
+    this.saveAll(this.favlist().filter((x) => !ids.includes(x.id)));
+  }
 
-  // 清空所有最愛清單
-  clearFav() {}
+  /** 清空所有最愛清單 */
+  clearFav() {
+    this.saveAll([]);
+  }
 }
