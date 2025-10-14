@@ -125,7 +125,7 @@
                 <!-- 數字（MaxT/MinT/PoP）-->
                 <span *ngSwitchCase="'number'">
                   <span class="val">{{ c.value }}</span>
-                  <span class="unit" *ngIf="c.unit">{{ c.unit }}</span>
+                  <span class="unit" *ngIf="c.unit">{{ c.unit === 'C' ? '°C' : c.unit }}</span>
                 </span>
                 <!-- 字串（Wx/CI）-->
                 <span *ngSwitchDefault>
