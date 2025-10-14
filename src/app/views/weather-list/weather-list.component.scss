@@ -34,44 +34,25 @@
     .buttonArea {
       display: flex;
       justify-content: flex-end;
-
-      .btnPrimary {
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        padding: 8px 10px;
-        font-size: 1rem;
-        border-radius: 4px;
-        cursor: pointer;
-
-        &:hover {
-          background-color: #0056b3;
-        }
-      }
-
-      .btnSecondary {
-        background-color: #6c757d;
-        color: #fff;
-        border: none;
-        padding: 8px 10px;
-        font-size: 1rem;
-        border-radius: 4px;
-        cursor: pointer;
-        margin-right: 8px;
-
-        &:hover {
-          background-color: #5a6268;
-        }
-      }
     }
   }
 }
 
 .toolArea {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
   gap: 8px;
   margin-bottom: 12px;
+
+  .toolArea-left {
+    flex: 1;
+  }
+
+  .toolArea-right {
+    display: flex;
+    gap: 0.5rem;
+  }
 }
 
 .tableWrap {
@@ -90,6 +71,7 @@
       position: sticky;
       top: 0;
       z-index: 1;
+      text-align: left;
     }
 
     .stickyCol {
@@ -147,6 +129,35 @@
     }
 
     // 按鈕樣式要再調整
+  }
+}
+
+.btnPrimary {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 10px;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+}
+
+.btnSecondary {
+  background-color: #6c757d;
+  color: #fff;
+  border: none;
+  padding: 8px 10px;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 8px;
+
+  &:hover {
+    background-color: #5a6268;
   }
 }
 

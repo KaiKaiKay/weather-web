@@ -65,23 +65,29 @@
   <div class="cardBody">
     <!-- 操作區域 -->
     <div class="toolArea">
-      <p>已選取資料筆數： {{ selectedCount }} 筆。</p>
-      <button
-        class="btn btnSecondary"
-        type="button"
-        (click)="clearSelection()"
-        [disabled]="selectedCount === 0"
-      >
-        取消勾選（{{ selectedCount }}）
-      </button>
-      <button
-        class="btn btnPrimary"
-        type="button"
-        (click)="addFavorites()"
-        [disabled]="selectedCount === 0"
-      >
-        加入我的最愛（{{ selectedCount }}）
-      </button>
+      <div class="toolArea-left">
+        <p>已選取資料筆數： {{ selectedCount }} 筆。</p>
+      </div>
+      <div class="toolArea-right">
+        <button
+          class="btn btnSecondary"
+          type="button"
+          (click)="clearSelection()"
+          [disabled]="selectedCount === 0"
+        >
+        <i class="fa-solid fa-square-minus"></i>
+          取消勾選（{{ selectedCount }}）
+        </button>
+        <button
+          class="btn btnPrimary"
+          type="button"
+          (click)="addFavorites()"
+          [disabled]="selectedCount === 0"
+        >
+          <i class="fa-solid fa-heart"></i>
+          加入我的最愛（{{ selectedCount }}）
+        </button>
+      </div>
     </div>
 
     <!-- 查詢結果表格 -->
