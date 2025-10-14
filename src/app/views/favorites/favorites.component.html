@@ -1,1 +1,191 @@
-<p>favorites works!</p>
+<div class="card">
+  <div class="cardHeader">
+    <h1 class="cardTitle">我的最愛</h1>
+  </div>
+
+  <div class="cardBody">
+    <div class="toolbar">
+      <a class="btn btnSecondary" routerLink="/weatherList">
+        <i class="fa-solid fa-arrow-left"></i>
+        回天氣列表
+      </a>
+      <div class="spacer"></div>
+      <button
+        class="btn btnSecondary"
+        (click)="removeSelected()"
+        [disabled]="selectedCount === 0"
+      >
+        <i class="fa-solid fa-trash-can"></i>
+        從我的最愛移除（{{ selectedCount }}）
+      </button>
+    </div>
+
+    <div class="tableWrap" *ngIf="rows.length; else empty">
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="stickyCol">
+              <input
+                type="checkbox"
+                [checked]="isAllCheckedOnPage"
+                [indeterminate]="isPartialCheckedOnPage"
+                (change)="toggleAllOnPage($event)"
+              />
+            </th>
+            <!-- 待優化 渲染 -->
+            <th class="stickyCol2">縣市</th>
+            <th>時段一</th>
+            <th>時段二</th>
+            <th>時段三</th>
+            <th>暱稱</th>
+            <th>電話</th>
+            <th>備註</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let row of pagedRows; trackBy: trackById">
+            <td class="stickyCol">
+              <input
+                type="checkbox"
+                [checked]="row.selected"
+                (change)="onRowSelectedChange($event, row)"
+              />
+            </td>
+
+            <td class="stickyCol2">{{ row.locationName }}</td>
+
+            <td>
+              {{ row.times[0]?.value
+              }}{{ row.times[0]?.unit === "C" ? "°C" : row.times[0]?.unit }}
+            </td>
+            <td>
+              {{ row.times[1]?.value
+              }}{{ row.times[1]?.unit === "C" ? "°C" : row.times[1]?.unit }}
+            </td>
+            <td>
+              {{ row.times[2]?.value
+              }}{{ row.times[2]?.unit === "C" ? "°C" : row.times[2]?.unit }}
+            </td>
+
+            <ng-container *ngIf="!row.editing; else editingRow">
+              <td>{{ row.nickname }}</td>
+              <td>{{ row.phone || "-" }}</td>
+              <td>{{ row.note || "-" }}</td>
+              <td>
+                <button class="btn btnPrimary" (click)="startEdit(row)">
+                  編輯
+                </button>
+              </td>
+            </ng-container>
+
+            <ng-template #editingRow>
+              <ng-container *ngIf="row.editing && row.form as fg">
+                <td [formGroup]="fg">
+                  <input
+                    class="formControl"
+                    formControlName="nickname"
+                    [class.invalid]="
+                      fg.get('nickname')?.invalid && fg.get('nickname')?.touched
+                    "
+                    placeholder="暱稱(必填2~20字)"
+                  />
+                  <div
+                    class="error"
+                    *ngIf="
+                      fg.get('nickname')?.hasError('required') &&
+                      fg.get('nickname')?.touched
+                    "
+                  >
+                    暱稱必填
+                  </div>
+                </td>
+
+                <td [formGroup]="fg">
+                  <input
+                    class="formControl"
+                    formControlName="phone"
+                    [class.invalid]="
+                      fg.get('phone')?.invalid && fg.get('phone')?.touched
+                    "
+                    placeholder="電話(不可含中文)"
+                  />
+                  <div
+                    class="error"
+                    *ngIf="
+                      fg.get('phone')?.hasError('pattern') &&
+                      fg.get('phone')?.touched
+                    "
+                  >
+                    請輸入數字
+                  </div>
+                  <!-- 不可輸入中文 控制 -->
+                </td>
+
+                <td [formGroup]="fg">
+                  <input
+                    class="formControl"
+                    formControlName="note"
+                    placeholder="備註"
+                  />
+                </td>
+
+                <td class="actions">
+                  <button class="btn btnSecondary" (click)="cancelEdit(row)">
+                    取消
+                  </button>
+                  <button class="btn btnPrimary" (click)="saveEdit(row)">
+                    儲存
+                  </button>
+                </td>
+              </ng-container>
+            </ng-template>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <ng-template #empty>
+      <div class="noData">
+        尚未加入任何最愛。到<a routerLink="/weatherList">天氣列表</a>勾選吧！
+      </div>
+    </ng-template>
+
+    <!-- 分頁 -->
+    <div class="pager" *ngIf="rows.length">
+      <div class="left">
+        共 {{ totalCount }} 筆，頁面 {{ currentPage }} / {{ totalPages }}
+      </div>
+      <div class="right">
+        <label
+          >每頁
+          <select
+            class="formControl small"
+            [value]="pageSize"
+            (change)="changePageSize($event)"
+          >
+            <option *ngFor="let s of pageSizeOptions" [value]="s">
+              {{ s }}
+            </option>
+          </select>
+          筆
+        </label>
+        <button
+          class="btn btnSecondary"
+          (click)="prevPage()"
+          [disabled]="currentPage === 1"
+        >
+          上一頁
+        </button>
+        <button
+          class="btn btnPrimary"
+          (click)="nextPage()"
+          [disabled]="currentPage === totalPages"
+        >
+          下一頁
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
