@@ -14,6 +14,8 @@ import {
   WeatherApiResponse,
   WeatherRowData,
 } from '../../interfaces/weatherListInterface';
+import { FavoritesService } from '../../services/favorites.service';
+import { FavoriteItem } from '../../interfaces/favoriteInterface';
 @Component({
   selector: 'app-weather-list',
   standalone: true,
@@ -24,7 +26,8 @@ import {
 export class WeatherListComponent {
   constructor(
     private weatherService: WeatherService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private fav: FavoritesService
   ) {}
 
   /** 天氣查詢條件 */
@@ -103,6 +106,19 @@ export class WeatherListComponent {
     PoP: '降雨機率',
   };
 
+  /** 轉換成我的最愛格式 */
+  private toFavorite(row: WeatherRowData): FavoriteItem {
+    return {
+      id: row.id,
+      locationName: row.locationName,
+      times: row.times.map((t) => ({ value: t.value, unit: t.unit })),
+      nickname: row.locationName, // 預設地點名
+      phone: '',
+      note: '',
+      createdAt: Date.now(),
+    };
+  }
+
   /** 初始化 */
   ngOnInit(): void {
     /** 天氣查詢條件表單初始化 */
@@ -173,20 +189,20 @@ export class WeatherListComponent {
         (e) => e.elementName === elementName
       );
       // 取得三個時段的值
-      const tArr = element?.time ?? []; 
+      const tArr = element?.time ?? [];
       // 建立三個時段的值陣列
       const times: TimeCell[] = this.timeHeaders.map((_, i) => {
         const seg = tArr[i]; // 取得對應時段的值
         const value = seg?.parameter?.parameterName ?? '-'; // 值
         const unit = seg?.parameter?.parameterUnit ?? ''; // 單位
-        
+
         // 判斷值的型態
         const kind: 'number' | 'text' = ['MaxT', 'MinT', 'PoP'].includes(
           elementName
         )
           ? 'number'
           : 'text';
-        return {  value, unit, kind };
+        return { value, unit, kind };
       });
 
       return {
@@ -194,7 +210,7 @@ export class WeatherListComponent {
         locationName: location.locationName, // 地點名稱
         times, // 三個時段的值陣列
         selected: false, // 是否被勾選
-      } as WeatherRowData; 
+      } as WeatherRowData;
     });
 
     this.totalCount = this.rows.length; // 總筆數
@@ -288,8 +304,17 @@ export class WeatherListComponent {
     }
   }
 
-  /** 我的最愛 尚未處理完畢 */
+  /** 我的最愛 */
   addFavorites() {
-    console.log('加入我的最愛');
+    const selected = this.rows.filter((r) => r.selected);
+    const favItems = selected.map((r) => this.toFavorite(r));
+
+    // 儲存到 localStorage
+    this.fav.upsertFav(favItems);
+    alert(`已將 ${selected.length} 筆資料加入我的最愛`);
+
+    // 取消勾選（當頁）
+    this.pagedRows.forEach((r) => (r.selected = false));
+    this.recomputeSelectionMeta();
   }
 }
