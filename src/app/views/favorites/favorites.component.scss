@@ -158,13 +158,14 @@
   }
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 /* 手機 RWD */
 @media (max-width: 640px) {
   .stickyCol2 {
     min-width: 96px;
   }
-}
-a {
-  text-decoration: none;
-  color: inherit;
 }
