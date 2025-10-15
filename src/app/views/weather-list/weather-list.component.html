@@ -1,7 +1,7 @@
 <!-- 查詢條件卡片 -->
 <div class="card">
   <div class="cardHeader">
-    <h1 class="cardTitle">查詢條件</h1>
+    <h1 class="cardTitle">查詢條件：一般天氣預報 - 今明36小時天氣預報</h1>
   </div>
   <div class="cardBody">
     <form [formGroup]="form">
@@ -66,6 +66,10 @@
     <!-- 操作區域 -->
     <div class="toolArea">
       <div class="toolArea-left">
+        <a class="btn btnSecondary" routerLink="/favorites">
+          <i class="fa-solid fa-arrow-left"></i>
+          查看我的最愛
+        </a>
         <p>已選取資料筆數： {{ selectedCount }} 筆。</p>
       </div>
       <div class="toolArea-right">
@@ -75,7 +79,7 @@
           (click)="clearSelection()"
           [disabled]="selectedCount === 0"
         >
-        <i class="fa-solid fa-square-minus"></i>
+          <i class="fa-solid fa-square-minus"></i>
           取消勾選（{{ selectedCount }}）
         </button>
         <button
@@ -125,7 +129,9 @@
                 <!-- 數字（MaxT/MinT/PoP）-->
                 <span *ngSwitchCase="'number'">
                   <span class="val">{{ c.value }}</span>
-                  <span class="unit" *ngIf="c.unit">{{ c.unit === 'C' ? '°C' : c.unit }}</span>
+                  <span class="unit" *ngIf="c.unit">{{
+                    c.unit === "C" ? "°C" : c.unit
+                  }}</span>
                 </span>
                 <!-- 字串（Wx/CI）-->
                 <span *ngSwitchDefault>
