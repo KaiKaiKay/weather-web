@@ -16,10 +16,11 @@ import {
 } from '../../interfaces/weatherListInterface';
 import { FavoritesService } from '../../services/favorites.service';
 import { FavoriteItem } from '../../interfaces/favoriteInterface';
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-weather-list',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterLink],
   templateUrl: './weather-list.component.html',
   styleUrl: './weather-list.component.scss',
 })
