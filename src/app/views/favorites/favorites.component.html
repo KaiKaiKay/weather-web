@@ -103,7 +103,7 @@
                     [class.invalid]="
                       fg.get('phone')?.invalid && fg.get('phone')?.touched
                     "
-                    placeholder="電話(不可含中文)"
+                    placeholder="電話(10碼數字)"
                   />
                   <div
                     class="error"
@@ -112,9 +112,17 @@
                       fg.get('phone')?.touched
                     "
                   >
-                    請輸入數字
+                    請輸入數字(10碼)
                   </div>
-                  <!-- 不可輸入中文 控制 -->
+                  <div
+                    class="error"
+                    *ngIf="
+                      fg.get('phone')?.hasError('zhChar') &&
+                      fg.get('phone')?.touched
+                    "
+                  >
+                    不可輸入中文
+                  </div>
                 </td>
 
                 <td [formGroup]="fg">
