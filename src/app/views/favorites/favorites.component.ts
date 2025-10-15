@@ -34,12 +34,12 @@ export class FavoritesComponent {
     { label: '操作' },
   ];
 
-  /** 每頁筆數 */
-  pageSize = 10;
   /** 當前頁數 */
   currentPage = 1;
   /** 可選每頁筆數 */
   pageSizeOptions: number[] = [5, 10, 20];
+  /** 每頁筆數 */
+  pageSize = this.pageSizeOptions[0];
   /** 可選每頁筆數 */
   get totalCount() {
     return this.rows.length;

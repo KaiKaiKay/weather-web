@@ -35,12 +35,12 @@ export class WeatherListComponent {
 
   /** 總筆數 */
   totalCount = 0;
-  /** 每頁筆數 */
-  pageSize = 10;
   /** 當前頁數 */
   currentPage = 1;
   /** 可選每頁筆數 */
   pageSizeOptions: number[] = [5, 10, 20];
+  /** 每頁筆數 */
+  pageSize = this.pageSizeOptions[0];
   /** 總頁數 */
   get totalPages(): number {
     return Math.max(1, Math.ceil(this.totalCount / this.pageSize));
@@ -131,7 +131,6 @@ export class WeatherListComponent {
   /** 查詢天氣 */
   onSubmit(): void {
     if (!this.form.valid) {
-      // 強制顯示所有驗證錯誤
       this.form.markAllAsTouched();
       return;
     }
