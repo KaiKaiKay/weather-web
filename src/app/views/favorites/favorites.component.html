@@ -32,15 +32,9 @@
                 (change)="toggleAllOnPage($event)"
               />
             </th>
-            <!-- 待優化 渲染 -->
-            <th class="stickyCol2">縣市</th>
-            <th>時段一</th>
-            <th>時段二</th>
-            <th>時段三</th>
-            <th>暱稱</th>
-            <th>電話</th>
-            <th>備註</th>
-            <th>操作</th>
+            <th *ngFor="let h of tableHeaders" [ngClass]="h.class">
+              {{ h.label }}
+            </th>
           </tr>
         </thead>
 

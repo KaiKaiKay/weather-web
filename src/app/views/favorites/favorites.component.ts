@@ -23,6 +23,17 @@ export class FavoritesComponent {
 
   rows: (FavoriteItem & { editing?: boolean; form?: FormGroup })[] = [];
 
+  tableHeaders = [
+  { label: '縣市', class: 'stickyCol2' },
+  { label: '時段一' },
+  { label: '時段二' },
+  { label: '時段三' },
+  { label: '暱稱' },
+  { label: '電話' },
+  { label: '備註' },
+  { label: '操作' }
+];
+
   /** 每頁筆數 */
   pageSize = 10;
   /** 當前頁數 */
