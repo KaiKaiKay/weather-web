@@ -1,0 +1,170 @@
+.card {
+  border: 1px solid #eee;
+  border-radius: 4px;
+  margin-bottom: 16px;
+  overflow: hidden;
+
+  .cardHeader {
+    background-color: #f5f5f5;
+    padding: 12px 16px;
+
+    .cardTitle {
+      font-size: 1.25rem;
+      margin-bottom: 0;
+    }
+  }
+
+  .cardBody {
+    padding: 12px 16px;
+  }
+}
+
+/* 工具列 */
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+
+  .spacer {
+    flex: 1;
+  }
+}
+
+/* 表格 */
+.tableWrap {
+  overflow-x: auto;
+
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+
+    th,
+    td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #eee;
+      white-space: nowrap;
+      background: #fff;
+      text-align: left;
+    }
+
+    thead th {
+      position: sticky;
+      top: 0;
+      z-index: 3; /* 壓過左欄 */
+      background: #fff;
+    }
+
+    .stickyCol {
+      position: sticky;
+      left: 0;
+      z-index: 4;
+      background: #fff;
+      width: 48px;
+    }
+
+    .stickyCol2 {
+      position: sticky;
+      left: 56px;
+      z-index: 4;
+      background: #fff;
+      min-width: 120px;
+    }
+  }
+}
+
+/* 表單欄位 編輯用 */
+.formControl {
+  width: 100%;
+  padding: 8px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+
+  &.invalid {
+    border-color: #d33;
+  }
+}
+.error {
+  color: #d33;
+  font-size: 0.75rem;
+  margin-top: 4px;
+}
+
+/* 編輯 動作 */
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* 無資料 */
+.noData {
+  color: #666;
+  padding: 8px 0;
+}
+
+/* 分頁 */
+.pagination {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  .left {
+    font-size: 0.9rem;
+    color: #666;
+  }
+
+  .right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    .formControl.small {
+      width: auto;
+      display: inline-block;
+      padding: 4px 6px;
+    }
+  }
+}
+
+/* 按鈕 */
+.btnPrimary {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 10px;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+}
+
+.btnSecondary {
+  background-color: #6c757d;
+  color: #fff;
+  border: none;
+  padding: 8px 10px;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #5a6268;
+  }
+}
+
+/* 手機 RWD */
+@media (max-width: 640px) {
+  .stickyCol2 {
+    min-width: 96px;
+  }
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
