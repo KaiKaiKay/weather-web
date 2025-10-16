@@ -107,7 +107,7 @@
                 (change)="toggleAllOnPage($event)"
               />
             </th>
-            <th class="stickyCol2">縣市</th>
+            <th>縣市</th>
             <th>天氣因子</th>
             <th *ngFor="let t of timeHeaders">{{ t.label }}</th>
           </tr>
@@ -122,7 +122,7 @@
                 (change)="onRowCheckboxChange($event, row)"
               />
             </td>
-            <td class="stickyCol2">{{ row.locationName }}</td>
+            <td>{{ row.locationName }}</td>
             <td>{{ weatherElements[row.elementName] }}</td>
             <!-- 三個時段 -->
             <td *ngFor="let c of row.times">

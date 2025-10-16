@@ -179,7 +179,7 @@ export class WeatherListComponent {
     const firstElement = first?.weatherElement.find(
       (e) => e.elementName === elementName
     );
-    // 取出三個時段: 00:00–06:00、06:00–12:00、12:00–18:00
+    // 取出三個時段
     const times = firstElement?.time.slice(0, 3) ?? [];
 
     // 建立表頭: 時間轉換成 MM/DD HH:mm~HH:mm 格式

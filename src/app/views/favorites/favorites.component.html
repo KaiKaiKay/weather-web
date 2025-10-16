@@ -32,7 +32,7 @@
                 (change)="toggleAllOnPage($event)"
               />
             </th>
-            <th *ngFor="let h of tableHeaders" [ngClass]="h.class">
+            <th *ngFor="let h of tableHeaders">
               {{ h.label }}
             </th>
           </tr>
@@ -48,7 +48,7 @@
               />
             </td>
 
-            <td class="stickyCol2">{{ row.locationName }}</td>
+            <td>{{ row.locationName }}</td>
             <td>{{ row.elementNameDes }}</td>
             <td *ngFor="let t of row.times">
               {{ t.startTime | date : "MM/dd HH:mm" }}~{{

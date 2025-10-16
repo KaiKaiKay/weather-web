@@ -47,12 +47,8 @@
       background: #fff;
       text-align: left;
     }
-
-    thead th {
-      position: sticky;
-      top: 0;
-      z-index: 3; /* 壓過左欄 */
-      background: #fff;
+    th {
+      text-align: left;
     }
 
     .stickyCol {

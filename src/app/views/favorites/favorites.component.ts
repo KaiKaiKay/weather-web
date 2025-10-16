@@ -25,7 +25,7 @@ export class FavoritesComponent {
 
   //還要優化顯示時段日期
   tableHeaders = [
-    { label: '縣市', class: 'stickyCol2' },
+    { label: '縣市'},
     { label: '天氣因子' },
     { label: '時段一' },
     { label: '時段二' },
