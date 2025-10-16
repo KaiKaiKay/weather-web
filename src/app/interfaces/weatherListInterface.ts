@@ -45,4 +45,6 @@ export interface WeatherRowData {
   locationName: string;
   times: TimeCell[];
   selected: boolean;
+  elementName: string;
+  elementNameDes?: string;
 }

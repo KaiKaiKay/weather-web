@@ -26,9 +26,10 @@ export class FavoritesComponent {
   //還要優化顯示時段日期
   tableHeaders = [
     { label: '縣市', class: 'stickyCol2' },
-    { label: '00:00–06:00' },
-    { label: '06:00–12:00' },
-    { label: '12:00–18:00' },
+    { label: '天氣因子' },
+    { label: '時段一' },
+    { label: '時段二' },
+    { label: '時段三' },
     { label: '暱稱' },
     { label: '電話' },
     { label: '備註' },

@@ -108,6 +108,7 @@
               />
             </th>
             <th class="stickyCol2">縣市</th>
+            <th>天氣因子</th>
             <th *ngFor="let t of timeHeaders">{{ t.label }}</th>
           </tr>
         </thead>
@@ -122,16 +123,18 @@
               />
             </td>
             <td class="stickyCol2">{{ row.locationName }}</td>
-
+            <td>{{ weatherElements[row.elementName] }}</td>
             <!-- 三個時段 -->
             <td *ngFor="let c of row.times">
               <ng-container [ngSwitch]="c.kind">
                 <!-- 數字（MaxT/MinT/PoP）-->
                 <span *ngSwitchCase="'number'">
                   <span class="val">{{ c.value }}</span>
-                  <span class="unit" *ngIf="c.unit">{{
-                    c.unit === "C" ? "°C" : c.unit
-                  }}</span>
+                  <span class="unit" *ngIf="c.unit">
+                    {{
+                      c.unit === "C" ? "°C" : c.unit === "百分比" ? "%" : c.unit
+                    }}
+                  </span>
                 </span>
                 <!-- 字串（Wx/CI）-->
                 <span *ngSwitchDefault>

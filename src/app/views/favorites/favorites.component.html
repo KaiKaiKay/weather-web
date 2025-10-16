@@ -1,6 +1,6 @@
 <div class="card">
   <div class="cardHeader">
-    <h1 class="cardTitle">我的最愛：一般天氣預報 - 今明36小時天氣預報</h1>
+    <h1 class="cardTitle">我的最愛</h1>
   </div>
 
   <div class="cardBody">
@@ -49,18 +49,12 @@
             </td>
 
             <td class="stickyCol2">{{ row.locationName }}</td>
-
-            <td>
-              {{ row.times[0]?.value
-              }}{{ row.times[0]?.unit === "C" ? "°C" : row.times[0]?.unit }}
-            </td>
-            <td>
-              {{ row.times[1]?.value
-              }}{{ row.times[1]?.unit === "C" ? "°C" : row.times[1]?.unit }}
-            </td>
-            <td>
-              {{ row.times[2]?.value
-              }}{{ row.times[2]?.unit === "C" ? "°C" : row.times[2]?.unit }}
+            <td>{{ row.elementNameDes }}</td>
+            <td *ngFor="let t of row.times">
+              {{ t.startTime | date : "MM/dd HH:mm" }}~{{
+                t.endTime | date : "MM/dd HH:mm"
+              }}
+              {{ t.value }}{{ t.unit === "C" ? "°C" : t.unit }}
             </td>
 
             <ng-container *ngIf="!row.editing; else editingRow">

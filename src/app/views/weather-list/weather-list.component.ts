@@ -51,7 +51,7 @@ export class WeatherListComponent {
   isShowTable = false;
 
   /** 時段表頭
-   * 三段時段：00:00–06:00、06:00–12:00、12:00–18:00
+   * 三段時段
    */
   timeHeaders: TimeHeader[] = [];
   /** 查詢結果列 */
@@ -110,10 +110,17 @@ export class WeatherListComponent {
   /** 轉換成我的最愛格式 */
   private toFavorite(row: WeatherRowData): FavoriteItem {
     return {
-      id: row.id,
+      id: `${row.locationName}-${row.elementName}`,
       locationName: row.locationName,
-      times: row.times.map((t) => ({ value: t.value, unit: t.unit })),
-      nickname: row.locationName, // 預設地點名
+      times: row.times.map((t, i) => ({
+        value: t.value,
+        unit: t.unit === '百分比' ? '%' : t.unit,
+        startTime: this.timeHeaders[i]?.start ?? '',
+        endTime: this.timeHeaders[i]?.end ?? '',
+      })),
+      elementName: row.elementName,
+      elementNameDes: this.weatherElements[row.elementName] || row.elementName, // 天氣因子中文
+      nickname: row.locationName,
       phone: '',
       note: '',
       createdAt: Date.now(),
@@ -206,10 +213,11 @@ export class WeatherListComponent {
       });
 
       return {
-        id: `${location.locationName}-${idx}`, //  資料ID
+        id: `${location.locationName}-${elementName}`, //  資料ID
         locationName: location.locationName, // 地點名稱
         times, // 三個時段的值陣列
         selected: false, // 是否被勾選
+        elementName, // 天氣因子名稱
       } as WeatherRowData;
     });
 
@@ -310,6 +318,8 @@ export class WeatherListComponent {
   addFavorites() {
     const selected = this.rows.filter((r) => r.selected);
     const favItems = selected.map((r) => this.toFavorite(r));
+
+    console.debug('favItems', favItems);
 
     // 儲存到 localStorage
     this.fav.upsertFav(favItems);
