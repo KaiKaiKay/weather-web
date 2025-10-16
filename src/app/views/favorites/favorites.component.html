@@ -59,7 +59,6 @@
 
             <ng-container *ngIf="!row.editing; else editingRow">
               <td>{{ row.nickname }}</td>
-              <td>{{ row.phone || "-" }}</td>
               <td>{{ row.note || "-" }}</td>
               <td>
                 <button class="btn btnPrimary" (click)="startEdit(row)">
@@ -89,36 +88,6 @@
                     暱稱必填
                   </div>
                 </td>
-
-                <td [formGroup]="fg">
-                  <input
-                    class="formControl"
-                    formControlName="phone"
-                    [class.invalid]="
-                      fg.get('phone')?.invalid && fg.get('phone')?.touched
-                    "
-                    placeholder="電話(10碼數字)"
-                  />
-                  <div
-                    class="error"
-                    *ngIf="
-                      fg.get('phone')?.hasError('pattern') &&
-                      fg.get('phone')?.touched
-                    "
-                  >
-                    請輸入數字(10碼)
-                  </div>
-                  <div
-                    class="error"
-                    *ngIf="
-                      fg.get('phone')?.hasError('zhChar') &&
-                      fg.get('phone')?.touched
-                    "
-                  >
-                    不可輸入中文
-                  </div>
-                </td>
-
                 <td [formGroup]="fg">
                   <input
                     class="formControl"

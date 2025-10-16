@@ -31,7 +31,6 @@ export class FavoritesComponent {
     { label: '時段二' },
     { label: '時段三' },
     { label: '暱稱' },
-    { label: '電話' },
     { label: '備註' },
     { label: '操作' },
   ];
@@ -130,14 +129,6 @@ export class FavoritesComponent {
           Validators.maxLength(20),
         ],
       ],
-      phone: [
-        row.phone || '',
-        [
-          Validators.pattern(/^\d{10}$/), // 10碼數字
-          (c: { value: any }) =>
-            /[\u4e00-\u9fff]/.test(c.value || '') ? { zhChar: true } : null,
-        ],
-      ],
       note: [row.note || ''],
     });
   }
@@ -158,7 +149,6 @@ export class FavoritesComponent {
     const updated: FavoriteItem = {
       ...row,
       nickname: v.nickname,
-      phone: v.phone,
       note: v.note,
     };
     delete (updated as any).editing;
@@ -168,7 +158,6 @@ export class FavoritesComponent {
     this.fav.updateFav(updated);
     // 更新畫面資料
     row.nickname = updated.nickname;
-    row.phone = updated.phone;
     row.note = updated.note;
     this.cancelEdit(row);
   }
