@@ -220,14 +220,16 @@ export class WeatherListComponent {
 
   /** 時間顯示格式化 */
   private formatRange(startTime: string, endTime: string): string {
-    const start = new Date(startTime); // 開始時間
-    const end = new Date(endTime); // 結束時間
-    const pad = (n: number) => n.toString().padStart(2, '0'); // 補零: 0 -> 00
+    const start = new Date(startTime);
+    const end = new Date(endTime);
+    const pad = (n: number) => n.toString().padStart(2, '0');
 
-    // 回傳格式: MM/DD HH:mm~HH:mm
+    // 起始日期與結束日期都顯示
     return `${pad(start.getMonth() + 1)}/${pad(start.getDate())} ${pad(
       start.getHours()
-    )}:00~${pad(end.getHours())}:00`;
+    )}:00~${pad(end.getMonth() + 1)}/${pad(end.getDate())} ${pad(
+      end.getHours()
+    )}:00`;
   }
 
   /** 重置結果 */
