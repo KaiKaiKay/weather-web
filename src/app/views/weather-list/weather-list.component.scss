@@ -172,4 +172,40 @@ a {
   .stickyCol2 {
     min-width: 96px;
   }
+
+  .toolArea {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+
+    .toolArea-left {
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .toolArea-right {
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+
+      .btn {
+        width: 100%;
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+
+  .pagination {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+
+    .right {
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+  }
 }
