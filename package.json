@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "deploy": "ng build --base-href=/weather-web/ && cp dist/weather-web/browser/index.html dist/weather-web/browser/404.html && npx angular-cli-ghpages --dir=dist/weather-web/browser"
   },
   "private": true,
   "dependencies": {
