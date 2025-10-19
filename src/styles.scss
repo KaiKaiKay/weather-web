@@ -1,5 +1,15 @@
+// 定義顏色變數
 $bgColor: #ffffff;
+$primaryColor: #007bff;
+$primaryHoverColor: #0056b3;
+$secondaryColor: #6c757d;
+$secondaryHoverColor: #5a6268;
+$borderColor: #eee;
+$textMutedColor: #666;
+$errorColor: red;
+$cardHeaderBg: #f5f5f5;
 
+// 全域樣式重置
 * {
   margin: 0;
   padding: 0;
@@ -9,4 +19,268 @@ $bgColor: #ffffff;
 body {
   position: relative;
   background: $bgColor;
+}
+
+// 按鈕基礎樣式
+@mixin button-base {
+  border: none;
+  padding: 8px 10px;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  display: inline-block;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+// Primary 按鈕樣式
+@mixin button-primary {
+  @include button-base;
+  background-color: $primaryColor;
+  color: #fff;
+
+  &:hover:not(:disabled) {
+    background-color: $primaryHoverColor;
+  }
+}
+
+// Secondary 按鈕樣式
+@mixin button-secondary {
+  @include button-base;
+  background-color: $secondaryColor;
+  color: #fff;
+
+  &:hover:not(:disabled) {
+    background-color: $secondaryHoverColor;
+  }
+}
+
+// 卡片
+@mixin card {
+  border: 1px solid $borderColor;
+  border-radius: 4px;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+
+// 卡片標頭
+@mixin card-header {
+  background-color: $cardHeaderBg;
+  padding: 12px 16px;
+}
+
+// 卡片內容
+@mixin card-body {
+  padding: 12px 16px;
+}
+
+// 表單
+@mixin form-control {
+  width: 100%;
+  padding: 8px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+
+  &.invalid {
+    border-color: $errorColor;
+  }
+
+  &.small {
+    width: auto;
+    display: inline-block;
+    padding: 4px 6px;
+  }
+}
+
+// 表格基礎樣式
+@mixin table-base {
+  width: 100%;
+  border-collapse: collapse;
+
+  th,
+  td {
+    padding: 10px 12px;
+    border-bottom: 1px solid $borderColor;
+    white-space: nowrap;
+    background: #fff;
+    text-align: left;
+  }
+
+  // 固定欄位1
+  .stickyCol {
+    position: sticky;
+    left: 0;
+    z-index: 4;
+    background: #fff;
+    width: 48px;
+  }
+
+  // 固定欄位2
+  .stickyCol2 {
+    position: sticky;
+    left: 56px;
+    z-index: 4;
+    background: #fff;
+    min-width: 120px;
+  }
+}
+
+// 表格外層
+@mixin table-wrap {
+  overflow-x: auto;
+}
+
+// 工具列
+@mixin toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+
+  .spacer {
+    flex: 1;
+  }
+}
+
+// 分頁
+@mixin pagination {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  .left {
+    font-size: 0.9rem;
+    color: $textMutedColor;
+  }
+
+  .right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+}
+
+// 元件
+.btn {
+  @include button-base;
+}
+
+// Primary 按鈕
+.btnPrimary {
+  @include button-primary;
+}
+
+// Secondary 按鈕
+.btnSecondary {
+  @include button-secondary;
+}
+
+// 卡片
+.card {
+  @include card;
+
+  .cardHeader {
+    @include card-header;
+
+    .cardTitle {
+      font-size: 1.25rem;
+      margin-bottom: 0;
+    }
+  }
+
+  .cardBody {
+    @include card-body;
+  }
+}
+
+// 表單
+.formControl {
+  @include form-control;
+}
+
+// 錯誤訊息
+.error {
+  color: $errorColor;
+  font-weight: 500;
+  font-size: 0.75rem;
+  margin-top: 4px;
+}
+
+// 表格
+.tableWrap {
+  @include table-wrap;
+
+  .table {
+    @include table-base;
+  }
+}
+
+// 工具列
+.toolbar {
+  @include toolbar;
+}
+
+// 分頁
+.pagination {
+  @include pagination;
+}
+
+// 無資料
+.noData {
+  color: $textMutedColor;
+  padding: 8px 0;
+}
+
+// 操作區域
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+// 超連結
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+// RWD 手機樣式
+@media (max-width: 640px) {
+
+  // 固定欄位2
+  .stickyCol2 {
+    min-width: 96px;
+  }
+
+  // 分頁
+  .pagination {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+
+    .right {
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+  }
+
+  // 工具列
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+
+    // 水平排列
+    &.horizontal-mobile {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+  }
 }
